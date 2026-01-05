@@ -1,0 +1,8 @@
+### Gradle ###
+.gradle
+build/
+*/build/
+build-logic/.gradle
+
+### IntelliJ IDEA ###
+.idea/
