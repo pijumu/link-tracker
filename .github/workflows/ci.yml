@@ -3,10 +3,22 @@ name: CI Pipeline
 on: [push, pull_request]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/java-setup
+      - name: Run linters
+        run: ./gradlew checkstyleMain spotlessCheck
+        continue-on-error: false
 
   assemble:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    needs: lint
+    if: success()
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,7 +27,7 @@ jobs:
         run: ./gradlew assemble
         continue-on-error: false
 
-  lint:
+  spotbugs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs: assemble
@@ -31,7 +43,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: lint
+    needs: spotbugs
     if: success()
     steps:
       - name: Checkout code
