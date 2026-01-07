@@ -1,4 +1,12 @@
-## LinkTracker
+# LinkTracker
 
-LinkTracker — это приложение для отслеживания обновлений по ссылкам (GitHub, StackOverflow и др.)
-Пользователи взаимодействуют с системой через Telegram-бота и получают уведомления об изменениях.
+## 📖 About:
+
+LinkTracker is an application for tracking updates on links (GitHub, StackOverflow, etc.).
+Users interact with the system via a Telegram bot and receive notifications about changes.
+
+
+## 📆 Planned:
+- [x] 🧱 Project structure: monorepo, build-logic, CI
+- [ ] 🛠️ Codebase migration and refactoring
+- [ ] 🚀 CI optimization (Gradle cache, build caching)
