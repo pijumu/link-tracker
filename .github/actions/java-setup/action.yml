@@ -1,0 +1,19 @@
+name: "Setup Java & Gradle"
+description: "Checkout repo, setup JDK and Gradle wrapper"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission to gradlew
+      shell: bash
+      run: chmod +x gradlew

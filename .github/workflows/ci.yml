@@ -1,0 +1,37 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/java-setup
+      - name: Run linters
+        run: ./gradlew checkstyleMain spotlessCheck
+        continue-on-error: false
+
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/java-setup
+      - name: Assemble
+        run: ./gradlew assemble
+        continue-on-error: false
+
+  spotbugs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/java-setup
+      - name: Run spotbugs
+        run: ./gradlew spotbugsMain
+        continue-on-error: false
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/java-setup
+      - name: Run spotbugs
+        run: ./gradlew test
+        continue-on-error: false

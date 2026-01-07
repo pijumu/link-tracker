@@ -1,10 +1,57 @@
 [versions]
+### java-common-conventions ###
+java-version = "21"
+junit-version = "5.12.2"
+lombok-version = "9.1.0"
+
+### spring-conventions ###
 spring-boot-version = "3.5.8"
 
+### spotbugs-conventions ###
+spotbugs-version = "6.4.8"
+findsecbugs-version = "1.14.0"
+bug-pattern-version = "1.5.0"
+
+### checkstyle-conventions ###
+checkstyle-version = "10.12.4"
+
+### spotless-conventions ###
+spotless-version = "8.1.0"
+
 [libraries]
+### java-common-conventions ###
+lombok-plugin = { group = "io.freefair.lombok", name = "io.freefair.lombok.gradle.plugin", version.ref = "lombok-version" }
+
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit-version" }
+
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+### spring-conventions ###
+spring-boot-plugin = { group = "org.springframework.boot", name = "org.springframework.boot.gradle.plugin", version.ref = "spring-boot-version" }
 spring-boot-bom = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot-version" }
+
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 
+### spotbugs-conventions ###
+spotbugs-plugin = { group = "com.github.spotbugs", name = "com.github.spotbugs.gradle.plugin", version.ref = "spotbugs-version" }
+findsecbugs = { group = "com.h3xstream.findsecbugs", name = "findsecbugs-plugin", version.ref = "findsecbugs-version" }
+bug-pattern = { group = "jp.skypencil.findbugs.slf4j", name = "bug-pattern", version.ref = "bug-pattern-version" }
+
+### spotless-conventions ###
+spotless-plugin = { group = "com.diffplug.gradle.spotless", name = "com.diffplug.gradle.spotless.gradle.plugin", version.ref = "spotless-version" }
+
 [plugins]
-spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot-version" }
+### java-common-conventions ###
+lombok = { id = "io.freefair.lombok" }
+
+### spring-conventions ###
+spring-boot = { id = "org.springframework.boot" }
+
+### spotbugs-conventions ###
+spotbugs = { id = "com.github.spotbugs" }
+
+### spotless-conventions ###
+spotless = { id = "com.diffplug.spotless" }
