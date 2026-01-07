@@ -4,18 +4,9 @@ on: [push, pull_request]
 
 jobs:
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - uses: ./.github/actions/java-setup
-      - name: Run linters
-        run: ./gradlew checkstyleMain spotlessCheck
-        continue-on-error: false
-
   assemble:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,22 +15,28 @@ jobs:
         run: ./gradlew assemble
         continue-on-error: false
 
-  spotbugs:
+  lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: assemble
+    if: success()
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: ./.github/actions/java-setup
-      - name: Run spotbugs
-        run: ./gradlew spotbugsMain
+      - name: Run linters
+        run: ./gradlew checkstyleMain spotlessCheck spotbugsMain
         continue-on-error: false
 
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: lint
+    if: success()
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: ./.github/actions/java-setup
-      - name: Run spotbugs
+      - name: Run tests
         run: ./gradlew test
         continue-on-error: false
