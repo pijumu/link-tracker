@@ -7,6 +7,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - uses: ./.github/actions/java-setup
       - name: Run linters
         run: ./gradlew checkstyleMain spotlessCheck
@@ -15,6 +17,8 @@ jobs:
   assemble:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - uses: ./.github/actions/java-setup
       - name: Assemble
         run: ./gradlew assemble
@@ -23,6 +27,8 @@ jobs:
   spotbugs:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - uses: ./.github/actions/java-setup
       - name: Run spotbugs
         run: ./gradlew spotbugsMain
@@ -31,6 +37,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - uses: ./.github/actions/java-setup
       - name: Run spotbugs
         run: ./gradlew test

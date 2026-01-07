@@ -4,9 +4,6 @@ description: "Checkout repo, setup JDK and Gradle wrapper"
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
